@@ -1,7 +1,12 @@
 #!/bin/bash
 
 #Run Main
-java --module-path lib:modules      \
-     --add-modules org.common.test  \
-      -m junit/org.junit.runner.JUnitCore common.math.test.CalculatriceTest
+echo "CalculatriceTest"
+java 	--module-path lib:modules/main/org.common      \
+	--add-modules org.common                       \
+	--add-reads org.common=junit                   \
+	--add-exports org.common/common.math=junit     \
+	--patch-module org.common=modules/test         \
+	-m junit/org.junit.runner.JUnitCore common.math.CalculatriceTest
+
 
